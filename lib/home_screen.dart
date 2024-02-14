@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    super.initState();
+    super.initState();  //init
     _marker.addAll(_list);
   }
 
