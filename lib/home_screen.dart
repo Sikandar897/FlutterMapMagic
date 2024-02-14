@@ -32,12 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
     Marker(
         markerId: MarkerId('3'),
         position: LatLng(33.6666, 73.0710),
-        infoWindow: InfoWindow(title: 'Sector I8'))
+        infoWindow: InfoWindow(title: 'Sector I8')),
+    Marker(
+        markerId: MarkerId('4'),
+        position: LatLng(23.4241, 53.8478),
+        infoWindow: InfoWindow(title: 'UAE'))
   ];
 
   @override
   void initState() {
-    super.initState();  //init
+    super.initState(); //init
     _marker.addAll(_list);
   }
 
@@ -48,10 +52,27 @@ class _HomeScreenState extends State<HomeScreen> {
         child: GoogleMap(
             markers: Set<Marker>.of(_marker),
             mapType: MapType.normal,
-            onMapCreated: (GoogleMapController controller){
+            onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
             initialCameraPosition: _kgooglePlex),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: Container(
+          alignment: Alignment.bottomLeft,
+          child: FloatingActionButton(
+            child: const Icon(Icons.directions),
+            onPressed: () async {
+              GoogleMapController controller = await _controller.future;
+              controller.animateCamera(CameraUpdate.newCameraPosition(
+                const CameraPosition(
+                    target: LatLng(25.2048, 55.2708), zoom: 13),
+              ));
+              setState(() {});
+            },
+          ),
+        ),
       ),
     );
   }
