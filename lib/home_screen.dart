@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     zoom: 13,
   );
 
-  List<Marker> _marker = [];
+  final List<Marker> _marker = [];
   //adding marker on map of this langitute and latitude
   final List<Marker> _list = const [
     Marker(
